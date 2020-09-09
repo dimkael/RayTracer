@@ -11,11 +11,11 @@ public:
 	inline double x() const;
 	inline double y() const;
 	inline double z() const;
-
-	Vec3 operator-() const;
+	
 	inline double operator[](int i) const;
 	inline double& operator[](int i);
 
+	Vec3 operator-() const;
 	Vec3& operator+=(const Vec3& v);
 	Vec3& operator*=(const double t);
 	Vec3& operator/=(const double t);
@@ -26,6 +26,20 @@ public:
 public:
 	double vec3[3];
 };
+
+inline std::ostream& operator<<(std::ostream& out, const Vec3& v);
+
+inline Vec3 operator+(const Vec3& u, const Vec3& v);
+inline Vec3 operator-(const Vec3& u, const Vec3& v);
+inline Vec3 operator*(const Vec3& u, const Vec3& v);
+inline Vec3 operator*(double t, const Vec3& v);
+inline Vec3 operator*(const Vec3& v, double t);
+inline Vec3 operator/(const Vec3& v, double t);
+
+inline double dot(const Vec3& u, const Vec3& v);
+inline Vec3 cross(const Vec3& u, const Vec3& v);
+
+inline Vec3 unit_vector(Vec3 v);
 
 using Point3 = Vec3;
 using Color = Vec3;
