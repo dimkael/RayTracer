@@ -79,17 +79,17 @@ Vec3 operator/(const Vec3& v, double t) {
 
 
 
-inline double dot(const Vec3& u, const Vec3& v) {
+double dot(const Vec3& u, const Vec3& v) {
 	return u.vec3[0] * v.vec3[0] + u.vec3[1] * v.vec3[1] + u.vec3[2] * v.vec3[2];
 }
 
-inline Vec3 cross(const Vec3& u, const Vec3& v) {
+Vec3 cross(const Vec3& u, const Vec3& v) {
 	return Vec3(u.vec3[1] * v.vec3[2] - u.vec3[2] * v.vec3[1],
 				u.vec3[2] * v.vec3[0] - u.vec3[0] * v.vec3[2],
 				u.vec3[0] * v.vec3[1] - u.vec3[1] * v.vec3[0]);
 }
 
 
-inline Vec3 unit_vector(Vec3 v) {
+Vec3 unit_vector(Vec3 v) {
 	return v / v.length();
 }
