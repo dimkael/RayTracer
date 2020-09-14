@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  color.cpp
+  main.cpp
+  vec3.cpp
+  Создание кода...
   RayTracing.vcxproj -> C:\Users\crist\Source\Repos\RayTracing\Debug\RayTracing.exe

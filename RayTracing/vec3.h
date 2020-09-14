@@ -8,12 +8,12 @@ public:
 	Vec3();
 	Vec3(double v1, double v2, double v3);
 
-	inline double x() const;
-	inline double y() const;
-	inline double z() const;
+	double x() const;
+	double y() const;
+	double z() const;
 	
-	inline double operator[](int i) const;
-	inline double& operator[](int i);
+	double operator[](int i) const;
+	double& operator[](int i);
 
 	Vec3 operator-() const;
 	Vec3& operator+=(const Vec3& v);

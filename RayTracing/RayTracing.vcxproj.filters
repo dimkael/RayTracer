@@ -21,9 +21,15 @@
     <ClCompile Include="vec3.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="color.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vec3.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

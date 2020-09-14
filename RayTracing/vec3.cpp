@@ -5,13 +5,13 @@ Vec3::Vec3() : vec3{ 0, 0, 0 } {}
 Vec3::Vec3(double v1, double v2, double v3) : vec3{ v1, v2, v3 } {}
 
 
-inline double Vec3::x() const { return vec3[0]; }
-inline double Vec3::y() const { return vec3[1]; }
-inline double Vec3::z() const { return vec3[2]; }
+double Vec3::x() const { return vec3[0]; }
+double Vec3::y() const { return vec3[1]; }
+double Vec3::z() const { return vec3[2]; }
 
 
-inline double Vec3::operator[](int i) const { return vec3[i]; }
-inline double& Vec3::operator[](int i) { return vec3[i]; }
+double Vec3::operator[](int i) const { return vec3[i]; }
+double& Vec3::operator[](int i) { return vec3[i]; }
 
 
 
