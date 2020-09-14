@@ -49,31 +49,31 @@ double Vec3::length_squared() const {
 
 
 
-inline std::ostream& operator<<(std::ostream& out, const Vec3& v) {
+std::ostream& operator<<(std::ostream& out, const Vec3& v) {
 	return out << v.vec3[0] << ' ' << v.vec3[1] << ' ' << v.vec3[2];
 }
 
-inline Vec3 operator+(const Vec3& u, const Vec3& v) {
+Vec3 operator+(const Vec3& u, const Vec3& v) {
 	return Vec3(u.vec3[0] + v.vec3[0], u.vec3[1] + v.vec3[1], u.vec3[2] + v.vec3[2]);
 }
 
-inline Vec3 operator-(const Vec3& u, const Vec3& v) {
+Vec3 operator-(const Vec3& u, const Vec3& v) {
 	return Vec3(u.vec3[0] - v.vec3[0], u.vec3[1] - v.vec3[1], u.vec3[2] - v.vec3[2]);
 }
 
-inline Vec3 operator*(const Vec3& u, const Vec3& v) {
+Vec3 operator*(const Vec3& u, const Vec3& v) {
 	return Vec3(u.vec3[0] * v.vec3[0], u.vec3[1] * v.vec3[1], u.vec3[2] * v.vec3[2]);
 }
 
-inline Vec3 operator*(double t, const Vec3& v) {
+Vec3 operator*(double t, const Vec3& v) {
 	return Vec3(t * v.vec3[0], t * v.vec3[1], t * v.vec3[2]);
 }
 
-inline Vec3 operator*(const Vec3& v, double t) {
+Vec3 operator*(const Vec3& v, double t) {
 	return t * v;
 }
 
-inline Vec3 operator/(const Vec3& v, double t) {
+Vec3 operator/(const Vec3& v, double t) {
 	return (1/t) * v;
 }
 

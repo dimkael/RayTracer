@@ -1,6 +1,7 @@
-#include "color.h"
-#include "vec3.h"
 #include <iostream>
+#include "vec3.h"
+#include "color.h"
+#include "ray.h"
 
 int main() {
 	const int image_width = 256;
