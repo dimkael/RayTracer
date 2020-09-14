@@ -3,9 +3,24 @@
 #include "color.h"
 #include "ray.h"
 
+// 1,125
+
+bool hit_sphere(const Point3& center, double radius, const Ray& ray) {
+	Vec3 oc = ray.origin() - center;
+	double a = dot(ray.direction(), ray.direction());
+	double b = 2.0 * dot(oc, ray.direction());
+	double c = dot(oc, oc) - radius * radius;
+	double d = b * b - 4 * a * c;
+	return d > 0;
+}
+
 Color ray_color(const Ray& ray) {
+	if (hit_sphere(Point3(0.0, 0.0, -1.0), 0.5, ray))
+		return Color(1.0, 0.0, 0.0);
+
 	Vec3 unit_direction = unit_vector(ray.direction());
 	double t = 0.5 * (unit_direction.y() + 1.0);
+
 	return (1.0 - t) * Color(1.0, 1.0, 1.0) + t * Color(0.5, 0.7, 1.0);
 }
 
