@@ -1,7 +1,2 @@
-﻿  main.cpp
-  Создание кода
-  3 of 31 functions ( 9.7%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Создание кода завершено
-  RayTracing.vcxproj -> C:\Users\crist\Source\Repos\RayTracing\Release\RayTracing.exe
+﻿  sphere.cpp
+C:\Users\crist\Source\Repos\RayTracing\RayTracing\sphere.cpp(9,104): error C2761: "bool Sphere::hit(const Ray &,double,double,HitRecord &) const": повторное объявление члена запрещено.
