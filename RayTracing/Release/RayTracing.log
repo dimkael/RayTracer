@@ -1,2 +1,8 @@
-﻿  sphere.cpp
-C:\Users\crist\Source\Repos\RayTracing\RayTracing\sphere.cpp(9,104): error C2761: "bool Sphere::hit(const Ray &,double,double,HitRecord &) const": повторное объявление члена запрещено.
+﻿  main.cpp
+C:\Users\crist\Source\Repos\RayTracing\RayTracing\main.cpp(10,13): warning C4101: localTime: неиспользованная локальная переменная
+  Создание кода
+  5 of 22 functions (22.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    6 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  RayTracing.vcxproj -> C:\Users\crist\Source\Repos\RayTracing\Release\RayTracing.exe

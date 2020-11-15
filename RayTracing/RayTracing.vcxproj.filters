@@ -47,5 +47,8 @@
     <ClInclude Include="sphere.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="draw.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

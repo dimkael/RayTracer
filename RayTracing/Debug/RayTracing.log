@@ -1,5 +1,7 @@
 ﻿  color.cpp
   main.cpp
+  ray.cpp
+  sphere.cpp
   vec3.cpp
   Создание кода...
   RayTracing.vcxproj -> C:\Users\crist\Source\Repos\RayTracing\Debug\RayTracing.exe

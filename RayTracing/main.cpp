@@ -1,66 +1,73 @@
-#include <iostream>
-#include "vec3.h"
-#include "color.h"
-#include "ray.h"
+#include <Windows.h>
+#include "draw.h"
 
-double hit_sphere(const Point3& center, double radius, const Ray& ray) {
-	Vec3 oc = ray.origin() - center;
-	double a = ray.direction().length_squared();
-	double half_b = dot(oc, ray.direction());
-	double c = oc.length_squared() - radius * radius;
-	double d = half_b * half_b - a * c;
-	
-	if (d < 0) {
-		return -1.0;
-	}
-	else {
-		return (-half_b - sqrt(d) / a);
-	}
-}
+int WIDTH = 1280;
+int HEIGHT = 720;
 
-Color ray_color(const Ray& ray) {
-	double t = hit_sphere(Point3(0.0, 0.0, -1.0), 0.5, ray);
-	if (t > 0.0) {
-		Vec3 N = unit_vector(ray.at(t) - Vec3(0.0, 0.0, -1.0));
-		return 0.5 * Color(N.x() + 1.0, N.y() + 1.0, N.z() + 1.0);
-	}
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	switch (message) {
+		case WM_PAINT: {
+			PAINTSTRUCT ps;
+			HDC hdc = BeginPaint(hWnd, &ps);
 
-	Vec3 unit_direction = unit_vector(ray.direction());
-	t = 0.5 * (unit_direction.y() + 1.0);
+			draw(hdc, WIDTH, HEIGHT);
 
-	return (1.0 - t) * Color(1.0, 1.0, 1.0) + t * Color(0.5, 0.7, 1.0);
-}
-
-int main() {
-	const double aspect_ratio = 16.0 / 9.0;
-	const int image_width = 400;
-	const int image_height = static_cast<int>(image_width / aspect_ratio);
-
-	double viewport_height = 2.0;
-	double viewport_width = aspect_ratio * viewport_height;
-	double focal_length = 1.0;
-
-	Point3 origin = Point3(0.0, 0.0, 0.0);
-	Vec3 horizontal = Vec3(viewport_width, 0.0, 0.0);
-	Vec3 vertical = Vec3(0.0, viewport_height, 0.0);
-	Point3 lower_left_corner = origin - horizontal / 2 - vertical / 2 - Vec3(0.0, 0.0, focal_length);
-
-	std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
-
-	for (int j = image_height - 1; j >= 0; j--) {
-		std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
-		for (int i = 0; i < image_width; i++) {
-			double u = double(i) / (image_width - 1);
-			double v = double(j) / (image_height - 1);
-			
-			Ray ray(origin, lower_left_corner + u * horizontal + v * vertical - origin);
-			Color pixel_color = ray_color(ray);
-
-			write_color(std::cout, pixel_color);
+			EndPaint(hWnd, &ps);
+			break;
 		}
+		case WM_SIZE: {
+			WIDTH = LOWORD(lParam);
+			HEIGHT = HIWORD(lParam);
+			break;
+		}
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			break;
+		default:
+			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 
-	std::cerr << "\nDone.\n";
+	return 0;
+}
+
+int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
+	MSG msg{};
+	HWND hWnd{};
+	WNDCLASS wc{sizeof(WNDCLASSEX)};
+
+	wc.hInstance = hInstance;
+	wc.lpszClassName = L"RTClass";
+	wc.lpfnWndProc = WndProc;
+	wc.style = CS_HREDRAW | CS_VREDRAW;
+	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.lpszMenuName = NULL;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hbrBackground = HBRUSH(COLOR_WINDOW + 1);
+
+	if (!RegisterClass(&wc)) return 0;
+
+	hWnd = CreateWindow(
+		L"RTClass",
+		L"RayTracingApp",
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		WIDTH,
+		HEIGHT,
+		HWND_DESKTOP,
+		NULL,
+		hInstance,
+		NULL
+	);
+
+	ShowWindow(hWnd, nShowCmd);
+
+	while (GetMessage(&msg, NULL, 0, 0)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
 	return 0;
 }
