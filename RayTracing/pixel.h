@@ -7,12 +7,11 @@
 class Pixel {
 public:
 	Pixel();
-	Pixel(int _x, int _y, int _samples);
+	Pixel(int _x, int _y);
 
 	void draw(HDC hdc);
 	
 public:
 	int x, y;
-	int samples;
 	Color color;
 };
