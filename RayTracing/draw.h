@@ -7,23 +7,7 @@
 #include "hittable_list.h"
 #include "sphere.h"
 #include "general_math.h"
-
-double viewport_width, viewport_height;
-double focal_length = 1.0;
-
-Point3 origin;
-Vec3 horizontal, vertical;
-Point3 lower_left_corner;
-
-void perspective(double image_width, double image_height) {
-	double aspect_ratio = image_width / image_height;
-	viewport_width = 5.0;
-	viewport_height = viewport_width / aspect_ratio;
-
-	horizontal = Vec3(viewport_width, 0.0, 0.0);
-	vertical = Vec3(0.0, viewport_height, 0.0);
-	lower_left_corner = origin - horizontal / 2 - vertical / 2 - Vec3(0.0, 0.0, focal_length);
-}
+#include "camera.h"
 
 double hit_sphere(const Point3& center, double radius, const Ray& ray) {
 	Vec3 oc = ray.origin() - center;
@@ -54,18 +38,18 @@ Color ray_color(const Ray& ray, const Hittable& world) {
 
 
 void draw(HDC& hdc, int image_width, int image_height) {
-	perspective(image_width, image_height);
-
 	HittableList world;
 	world.add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.0), 0.5));
 	world.add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100));
+
+	Camera camera(image_width, image_height);
 
 	for (int j = image_height - 1; j >= 0; j--) {
 		for (int i = 0; i < image_width; i++) {
 			double u = double(i) / (image_width - 1.0);
 			double v = double(j) / (image_height - 1.0);
 
-			Ray ray(origin, lower_left_corner + u * horizontal + v * vertical - origin);
+			Ray ray = camera.get_ray(u, v);
 			Color pixel_color = ray_color(ray, world);
 
 			SetPixel(hdc, i, image_height - j, RGB(255.999 * pixel_color.x(), 255.999 * pixel_color.y(), 255.999 * pixel_color.z()));

@@ -62,5 +62,8 @@
     <ClInclude Include="general_math.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
