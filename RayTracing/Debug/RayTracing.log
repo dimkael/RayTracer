@@ -1,5 +1,2 @@
-﻿  hittable.cpp
-  hittable_list.cpp
-  sphere.cpp
-  Создание кода...
+﻿  main.cpp
   RayTracing.vcxproj -> C:\Users\crist\Source\Repos\RayTracing\Debug\RayTracing.exe
