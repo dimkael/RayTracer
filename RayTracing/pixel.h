@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include "vec3.h"
+#include "general_math.h"
 
 class Pixel {
 public:

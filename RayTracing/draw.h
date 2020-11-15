@@ -9,7 +9,7 @@
 #include "general_math.h"
 #include "camera.h"
 
-const int antialiasing_multiplier = 4;
+const int antialiasing_multiplier = 8;
 
 double hit_sphere(const Point3& center, double radius, const Ray& ray) {
 	Vec3 oc = ray.origin() - center;

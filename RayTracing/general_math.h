@@ -23,3 +23,11 @@ inline double clamp(double x, double min, double max) {
 	if (x > max) return max;
 	return x;
 }
+
+inline Point3 clamp(Point3 point, double min, double max) {
+	return Point3(
+		clamp(point.x(), min, max),
+		clamp(point.y(), min, max),
+		clamp(point.z(), min, max)
+	);
+}
