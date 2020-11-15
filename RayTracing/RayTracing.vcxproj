@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="color.h" />
     <ClInclude Include="draw.h" />
+    <ClInclude Include="general_math.h" />
     <ClInclude Include="hittable_list.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="hittable.h" />
