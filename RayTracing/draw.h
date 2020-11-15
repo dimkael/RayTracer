@@ -3,11 +3,13 @@
 #include <memory>
 #include "vec3.h"
 #include "ray.h"
-#include "color.h"
+#include "pixel.h"
 #include "hittable_list.h"
 #include "sphere.h"
 #include "general_math.h"
 #include "camera.h"
+
+const int antialiasing_multiplier = 4;
 
 double hit_sphere(const Point3& center, double radius, const Ray& ray) {
 	Vec3 oc = ray.origin() - center;
@@ -46,13 +48,23 @@ void draw(HDC& hdc, int image_width, int image_height) {
 
 	for (int j = image_height - 1; j >= 0; j--) {
 		for (int i = 0; i < image_width; i++) {
-			double u = double(i) / (image_width - 1.0);
+			/*double u = double(i) / (image_width - 1.0);
 			double v = double(j) / (image_height - 1.0);
 
 			Ray ray = camera.get_ray(u, v);
 			Color pixel_color = ray_color(ray, world);
 
-			SetPixel(hdc, i, image_height - j, RGB(255.999 * pixel_color.x(), 255.999 * pixel_color.y(), 255.999 * pixel_color.z()));
+			SetPixel(hdc, i, image_height - j, RGB(255.999 * pixel_color.x(), 255.999 * pixel_color.y(), 255.999 * pixel_color.z()));*/
+			//Color pixel_color(0.0, 0.0, 0.0);
+			Pixel pixel(i, image_height - j, antialiasing_multiplier);
+			for (int s = 0; s < antialiasing_multiplier; s++) {
+				double u = (i + random_double()) / (image_width - 1.0);
+				double v = (j + random_double()) / (image_height - 1.0);
+
+				Ray ray = camera.get_ray(u, v);
+				pixel.color += ray_color(ray, world);
+			}
+			pixel.draw(hdc);
 		}
 	}
 }
