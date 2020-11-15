@@ -138,6 +138,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="hittable.cpp" />
+    <ClCompile Include="hittable_list.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="ray.cpp" />
@@ -147,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="color.h" />
     <ClInclude Include="draw.h" />
+    <ClInclude Include="hittable_list.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="hittable.h" />
     <ClInclude Include="ray.h" />
