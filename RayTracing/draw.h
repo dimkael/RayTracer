@@ -10,6 +10,7 @@
 #include "camera.h"
 
 bool antialiasing = false;
+const int MAX_DEPTH = 50;
 
 double hit_sphere(const Point3& center, double radius, const Ray& ray) {
 	Vec3 oc = ray.origin() - center;
@@ -26,10 +27,15 @@ double hit_sphere(const Point3& center, double radius, const Ray& ray) {
 	}
 }
 
-Color ray_color(const Ray& ray, const Hittable& world) {
+Color ray_color(const Ray& ray, const Hittable& world, int depth) {
+	if (depth <= 0) return Color(0.0, 0.0, 0.0);
+	
 	HitRecord hit_rec;
-	if (world.hit(ray, 0.0, inf, hit_rec)) {
-		return 0.5 * (hit_rec.normal + Color(1.0, 1.0, 1.0));
+	if (world.hit(ray, 0.001, inf, hit_rec)) {
+		//Point3 target = hit_rec.point + hit_rec.normal + unit_sphere_rand();
+		//Point3 target = hit_rec.point + hit_rec.normal + random_unit_vector();
+		Point3 target = hit_rec.point + hit_rec.normal + hemisphere_rand(hit_rec.normal);
+		return 0.5 * ray_color(Ray(hit_rec.point, target - hit_rec.point), world, depth - 1);
 	}
 
 	Vec3 unit_direction = unit_vector(ray.direction());
@@ -56,16 +62,16 @@ void draw(HDC& hdc, int image_width, int image_height) {
 					for (int l = 0; l < 2; l++) {
 						double v = (j + pow(-1.0, l) * 0.2) / (image_height - 1.0);
 						ray = camera.get_ray(u, v);
-						pixel.color += ray_color(ray, world);
+						pixel.color += ray_color(ray, world, MAX_DEPTH);
 					}
 				}
-				pixel.color *= 1.0 / 4.0;
+				pixel.color /= 4.0;
 			}
 			else {
 				double u = i / (image_width - 1.0);
 				double v = j / (image_height - 1.0);
 				ray = camera.get_ray(u, v);
-				pixel.color += ray_color(ray, world);
+				pixel.color += ray_color(ray, world, MAX_DEPTH);
 			}
 
 			pixel.draw(hdc);

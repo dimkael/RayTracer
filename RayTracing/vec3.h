@@ -1,7 +1,6 @@
 #pragma once
 
-#include <cmath>
-#include <iostream>
+#include "general_math.h"
 
 class Vec3 {
 public:
@@ -23,11 +22,12 @@ public:
 	double length() const;
 	double length_squared() const;
 
+	inline static Vec3 random();
+	inline static Vec3 random(double min, double max);
+
 public:
 	double vec3[3];
 };
-
-std::ostream& operator<<(std::ostream& out, const Vec3& v);
 
 Vec3 operator+(const Vec3& u, const Vec3& v);
 Vec3 operator-(const Vec3& u, const Vec3& v);
@@ -40,6 +40,9 @@ double dot(const Vec3& u, const Vec3& v);
 Vec3 cross(const Vec3& u, const Vec3& v);
 
 Vec3 unit_vector(Vec3 v);
+Vec3 unit_sphere_rand();
+Vec3 random_unit_vector();
+Vec3 hemisphere_rand(const Vec3& normal);
 
 using Point3 = Vec3;
 using Color = Vec3;
