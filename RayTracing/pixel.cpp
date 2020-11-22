@@ -5,10 +5,11 @@ Pixel::Pixel(int _x, int _y) : x(_x), y(_y) {}
 
 void Pixel::draw(HDC hdc) {
 	color = Point3(
-		sqrt(color.x()),
+		sqrt(color.x()), // gamma 2.0
 		sqrt(color.y()),
 		sqrt(color.z())
 	);
+
 	color = Point3(
 		clamp(color.x(), 0.0, 0.999),
 		clamp(color.y(), 0.0, 0.999),

@@ -59,6 +59,13 @@ inline Vec3 Vec3::random(double min, double max) {
 
 
 
+bool Vec3::near_zero() const {
+	const double s = 1e-8;
+	return (fabs(vec3[0]) < s) && (fabs(vec3[1]) < s) && (fabs(vec3[2]) < s);
+}
+
+
+
 Vec3 operator+(const Vec3& u, const Vec3& v) {
 	return Vec3(u.vec3[0] + v.vec3[0], u.vec3[1] + v.vec3[1], u.vec3[2] + v.vec3[2]);
 }
@@ -120,4 +127,10 @@ Vec3 hemisphere_rand(const Vec3& normal) {
 		return unit_sphere_vector;
 	else
 		return -unit_sphere_vector;
+}
+
+
+
+Vec3 reflect(const Vec3& v, const Vec3& n) {
+	return v - 2 * dot(v, n) * n;
 }

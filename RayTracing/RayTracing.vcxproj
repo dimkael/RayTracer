@@ -142,6 +142,7 @@
     <ClCompile Include="hittable.cpp" />
     <ClCompile Include="hittable_list.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="material.cpp" />
     <ClCompile Include="pixel.cpp" />
     <ClCompile Include="ray.cpp" />
     <ClCompile Include="sphere.cpp" />
@@ -149,9 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
-    <ClInclude Include="draw.h" />
+    <ClInclude Include="renderer.h" />
     <ClInclude Include="general_math.h" />
     <ClInclude Include="hittable_list.h" />
+    <ClInclude Include="material.h" />
     <ClInclude Include="pixel.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="hittable.h" />

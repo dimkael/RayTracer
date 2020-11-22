@@ -1,5 +1,5 @@
 #include <Windows.h>
-#include "draw.h"
+#include "renderer.h"
 
 int WIDTH = 1280;
 int HEIGHT = 720;
@@ -10,7 +10,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hWnd, &ps);
 
-			draw(hdc, WIDTH, HEIGHT);
+			render(hdc, WIDTH, HEIGHT);
 
 			EndPaint(hWnd, &ps);
 			break;

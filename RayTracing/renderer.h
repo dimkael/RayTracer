@@ -6,10 +6,11 @@
 #include "pixel.h"
 #include "hittable_list.h"
 #include "sphere.h"
+#include "material.h"
 #include "general_math.h"
 #include "camera.h"
 
-bool antialiasing = false;
+bool antialiasing = true;
 const int MAX_DEPTH = 50;
 
 double hit_sphere(const Point3& center, double radius, const Ray& ray) {
@@ -32,10 +33,13 @@ Color ray_color(const Ray& ray, const Hittable& world, int depth) {
 	
 	HitRecord hit_rec;
 	if (world.hit(ray, 0.001, inf, hit_rec)) {
-		//Point3 target = hit_rec.point + hit_rec.normal + unit_sphere_rand();
-		//Point3 target = hit_rec.point + hit_rec.normal + random_unit_vector();
-		Point3 target = hit_rec.point + hit_rec.normal + hemisphere_rand(hit_rec.normal);
-		return 0.5 * ray_color(Ray(hit_rec.point, target - hit_rec.point), world, depth - 1);
+		Ray scattered;
+		Color attenuation;
+
+		if (hit_rec.material_ptr->scatter(ray, hit_rec, attenuation, scattered))
+			return attenuation * ray_color(scattered, world, depth - 1);
+
+		return Color(0.0, 0.0, 0.0);
 	}
 
 	Vec3 unit_direction = unit_vector(ray.direction());
@@ -44,10 +48,18 @@ Color ray_color(const Ray& ray, const Hittable& world, int depth) {
 	return (1.0 - t) * Color(1.0, 1.0, 1.0) + t * Color(0.5, 0.7, 1.0);
 }
 
-void draw(HDC& hdc, int image_width, int image_height) {
+void render(HDC& hdc, int image_width, int image_height) {
 	HittableList world;
-	world.add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.0), 0.5));
-	world.add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100));
+
+	std::shared_ptr<Lambertian> material_ground = std::make_shared<Lambertian>(Color(0.8, 0.8, 0.0));
+	std::shared_ptr<Lambertian> material_center = std::make_shared<Lambertian>(Color(0.7, 0.3, 0.3));
+	std::shared_ptr<Metal> material_left = std::make_shared<Metal>(Color(0.8, 0.8, 0.8));
+	std::shared_ptr<Metal> material_right = std::make_shared<Metal>(Color(0.8, 0.6, 0.2));
+
+	world.add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100, material_ground));
+	world.add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.0), 0.5, material_center));
+	world.add(std::make_shared<Sphere>(Point3(-1.0, 0.0, -1.0), 0.5, material_left));
+	world.add(std::make_shared<Sphere>(Point3(1.0, 0.0, -1.0), 0.5, material_right));
 
 	Camera camera(image_width, image_height);
 
@@ -66,6 +78,15 @@ void draw(HDC& hdc, int image_width, int image_height) {
 					}
 				}
 				pixel.color /= 4.0;
+
+				/*int antialiasing_multiplier = 8;
+				for (int s = 0; s < antialiasing_multiplier; s++) {
+					double u = (i + random_double()) / (image_width - 1);
+					double v = (j + random_double()) / (image_height - 1);
+					Ray ray = camera.get_ray(u, v);
+					pixel.color += ray_color(ray, world, MAX_DEPTH);
+				}
+				pixel.color /= double(antialiasing_multiplier);*/
 			}
 			else {
 				double u = i / (image_width - 1.0);

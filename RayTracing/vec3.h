@@ -25,6 +25,8 @@ public:
 	inline static Vec3 random();
 	inline static Vec3 random(double min, double max);
 
+	bool near_zero() const;
+
 public:
 	double vec3[3];
 };
@@ -43,6 +45,8 @@ Vec3 unit_vector(Vec3 v);
 Vec3 unit_sphere_rand();
 Vec3 random_unit_vector();
 Vec3 hemisphere_rand(const Vec3& normal);
+
+Vec3 reflect(const Vec3& v, const Vec3& n);
 
 using Point3 = Vec3;
 using Color = Vec3;
