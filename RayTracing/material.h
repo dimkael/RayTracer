@@ -24,10 +24,11 @@ public:
 
 class Metal : public Material {
 public:
-	Metal(const Color& _albedo);
+	Metal(const Color& _albedo, double _fuzziness);
 
 	bool scatter(const Ray& ray_in, const HitRecord& hit_rec, Color& attenuation, Ray& scattered) const override;
 
 public:
 	Color albedo;
+	double fuzziness;
 };
