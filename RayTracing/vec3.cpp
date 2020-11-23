@@ -134,3 +134,11 @@ Vec3 hemisphere_rand(const Vec3& normal) {
 Vec3 reflect(const Vec3& v, const Vec3& n) {
 	return v - 2 * dot(v, n) * n;
 }
+
+Vec3 refract(const Vec3& uv, const Vec3& n, double eta) {
+	double cos_theta = fmin(dot(-uv, n), 1.0);
+	Vec3 r_out_perp = eta * (uv + cos_theta * n);
+	Vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
+
+	return r_out_perp + r_out_parallel;
+}

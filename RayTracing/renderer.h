@@ -52,13 +52,14 @@ void render(HDC& hdc, int image_width, int image_height) {
 	HittableList world;
 
 	std::shared_ptr<Lambertian> material_ground = std::make_shared<Lambertian>(Color(0.8, 0.8, 0.0));
-	std::shared_ptr<Lambertian> material_center = std::make_shared<Lambertian>(Color(0.7, 0.3, 0.3));
-	std::shared_ptr<Metal> material_left = std::make_shared<Metal>(Color(0.8, 0.8, 0.8), 0.3);
-	std::shared_ptr<Metal> material_right = std::make_shared<Metal>(Color(0.8, 0.6, 0.2), 1.0);
+	std::shared_ptr<Lambertian> material_center = std::make_shared<Lambertian>(Color(0.1, 0.2, 0.5));
+	std::shared_ptr<Dielectric> material_left = std::make_shared<Dielectric>(1.5);
+	std::shared_ptr<Metal> material_right = std::make_shared<Metal>(Color(0.8, 0.6, 0.2), 0.0);
 
 	world.add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100, material_ground));
 	world.add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.0), 0.5, material_center));
 	world.add(std::make_shared<Sphere>(Point3(-1.0, 0.0, -1.0), 0.5, material_left));
+	world.add(std::make_shared<Sphere>(Point3(-1.0, 0.0, -1.0), -0.4, material_left));
 	world.add(std::make_shared<Sphere>(Point3(1.0, 0.0, -1.0), 0.5, material_right));
 
 	Camera camera(image_width, image_height);

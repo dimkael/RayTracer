@@ -47,6 +47,7 @@ Vec3 random_unit_vector();
 Vec3 hemisphere_rand(const Vec3& normal);
 
 Vec3 reflect(const Vec3& v, const Vec3& n);
+Vec3 refract(const Vec3& uv, const Vec3& n, double eta);
 
 using Point3 = Vec3;
 using Color = Vec3;

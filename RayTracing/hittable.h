@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
+#include "general_math.h"
 #include "ray.h"
-#include "material.h"
 
 class Material;
 
