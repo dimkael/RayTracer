@@ -49,11 +49,11 @@ double Vec3::length_squared() const {
 
 
 
-inline Vec3 Vec3::random() {
+Vec3 Vec3::random() {
 	return Vec3(random_double(), random_double(), random_double());
 }
 
-inline Vec3 Vec3::random(double min, double max) {
+Vec3 Vec3::random(double min, double max) {
 	return Vec3(random_double(min, max), random_double(min, max), random_double(min, max));
 }
 
@@ -112,6 +112,15 @@ Vec3 unit_sphere_rand() {
 	while (true) {
 		Vec3 p = Vec3::random(-1.0, 1.0);
 		if (p.length_squared() >= 1.0) continue;
+
+		return p;
+	}
+}
+
+Vec3 unit_disk_random() {
+	while (true) {
+		Vec3 p(random_double(-1.0, 1.0), random_double(-1.0, 1.0), 0);
+		if (p.length_squared() >= 1) continue;
 
 		return p;
 	}

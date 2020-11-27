@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "hittable.h"
+#include "general_math.h"
 
 class HittableList : public Hittable {
 public:
