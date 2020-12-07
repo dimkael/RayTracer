@@ -1,1 +1,0 @@
-call Release\RayTracing.exe > image.ppm

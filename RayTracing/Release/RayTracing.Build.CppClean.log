@@ -1,9 +1,15 @@
 c:\users\crist\source\repos\raytracing\raytracing\release\vc142.pdb
 c:\users\crist\source\repos\raytracing\raytracing\release\vec3.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\sphere.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\ray.obj
 c:\users\crist\source\repos\raytracing\raytracing\release\color.obj
 c:\users\crist\source\repos\raytracing\raytracing\release\main.obj
-c:\users\crist\source\repos\raytracing\raytracing\release\ray.obj
-c:\users\crist\source\repos\raytracing\raytracing\release\sphere.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\material.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\hittable_list.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\hittable.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\renderer.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\pixel.obj
+c:\users\crist\source\repos\raytracing\raytracing\release\camera.obj
 c:\users\crist\source\repos\raytracing\release\raytracing.exe
 c:\users\crist\source\repos\raytracing\release\raytracing.pdb
 c:\users\crist\source\repos\raytracing\release\raytracing.ipdb
