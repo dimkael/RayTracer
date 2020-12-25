@@ -1,3 +1,2 @@
-# RayTracer
-Индивидуальное творческое задание (Лабораторная работа №4) по дисциплине "Программирование специализированных вычислительных устройств"
-МГТУ "СТАНКИН"
+# RaytracingApp
+Raytracing applictaion with different materials, anti-aliasing, positionable camera and motion blur effect
